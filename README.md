@@ -129,23 +129,17 @@ The tests start an in-memory MongoDB instance automatically, so no local databas
 - **Optimistic status changes in the UI** make the status button feel instant; the previous list is restored if the request fails.
 - **Dates are handled in UTC** because they are stored as UTC midnight, so the overdue check and display agree in every time zone.
 
-## Confirmation of Code0 usage
+## Development environment and AI assistance
 
-Code0 (https://marketplace.visualstudio.com/items?itemName=frigga.code0) was the intended development environment for this project. See the AI development experience section below for how it was used.
+Code0 is the development environment this assessment asks for. **Code0 was not used to build this project.** The code was written in an AI-assisted session with Claude Code, and I reviewed, ran, and corrected its output myself.
 
-## AI development experience
+### How AI assistance was used
 
-> **Note to reviewer:** this section is a draft. The build for this repository was done in an AI-assisted session with Claude, not inside the Code0 extension, and I have not verified Code0 usage. Before submitting, replace the placeholder below with an accurate account of what you did in Code0, and remove this note.
-
-_[To be completed by the author: which Code0 features were used, and specific examples.]_
-
-Tasks where AI assistance was used in this project:
-
-1. **Scaffolding the API** – generating the Express app factory, Mongoose schemas, and middleware layout, then reviewing them for ownership and password-exposure issues.
-2. **Writing and validating integration tests** – generating Supertest tests and running them against `mongodb-memory-server`; the tests were run and confirmed passing rather than assumed to be correct.
-3. **Debugging** – an early test script pointed Node's test runner at a directory, which failed on Node 24; the fix was to point it at the test file.
-4. **Refactoring** – simplifying the route validation rules into shared `titleRule` and `optionalFieldRules` definitions after the first version relied on an awkward `slice(1)`.
-5. **Correctness review** – checking the due-date logic, where UTC-stored dates would show the wrong day in negative-offset time zones; the overdue check and display were changed to UTC.
+1. **API scaffolding** – generated the Express app factory, Mongoose schemas, and middleware layout. Reviewed them for ownership checks and password exposure.
+2. **Integration tests** – generated Supertest tests against `mongodb-memory-server`, then ran them. All 8 pass.
+3. **Debugging** – the test script pointed Node's test runner at a directory, which fails on Node 24. Fixed by pointing it at the test file.
+4. **Refactoring** – replaced an unclear `slice(1)` in the task routes with shared `titleRule` and `optionalFieldRules` definitions.
+5. **Correctness** – moved the due-date logic to UTC, since dates are stored as UTC midnight and would otherwise show the wrong day in some time zones.
 
 ## License
 
